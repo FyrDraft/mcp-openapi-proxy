@@ -5,11 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mcp-openapi-proxy"
 requires-python = ">=3.10"
-version = "0.1.0"
-description = "MCP server for exposing OpenAPI specifications as MCP tools."
+version = "0.1.0+fd.1.0"
+description = "Fyrdraft modified MCP server for exposing OpenAPI specifications as MCP tools."
 readme = "README.md"
 authors = [
-  { name = "Matthew Hand", email = "matthewhandau@gmail.com" }
+  { name = "Matthew Hand", email = "matthewhandau@gmail.com" },
+  { name = "Bryan Fork Team", email = "bryan@fyrdraft.ai" }
 ]
 dependencies = [
   "mcp[cli]>=1.2.0",
@@ -40,3 +41,8 @@ asyncio_default_fixture_loop_scope = "function"
 
 [tool.setuptools.packages]
 find = {include = ["mcp_openapi_proxy", "mcp_openapi_proxy.*"]}
+
+# Custom field to indicate the fork source
+[forked-from]
+original-project = "mcp-openapi-proxy"
+original-url = "https://github.com/original-author/mcp-openapi-proxy"

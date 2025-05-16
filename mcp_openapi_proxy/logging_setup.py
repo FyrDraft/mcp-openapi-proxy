@@ -13,12 +13,14 @@ def setup_logging(debug: bool = False) -> logging.Logger:
     """Set up logging with the specified debug level."""
     # Logger is now initialized at module level, just configure it
     if not logger.handlers:
-        handler = logging.StreamHandler(sys.stderr)
+        logfile_path = os.getenv("OPENAPI_LOGFILE_PATH")
+        handler = logging.FileHandler(logfile_path) if logfile_path else logging.StreamHandler(sys.stderr)
         formatter = logging.Formatter("[%(levelname)s] %(asctime)s - %(message)s")
         handler.setFormatter(formatter)
         logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG if debug else logging.INFO)
-    logger.debug("Logging configured")
+        logger.setLevel(logging.DEBUG if debug else logging.INFO)
+        logger.debug("================================================= STARTED LOGGING =================================================")
+        logger.debug("Logging configured")
     return logger
 
 # Configure logger based on DEBUG env var when module is imported

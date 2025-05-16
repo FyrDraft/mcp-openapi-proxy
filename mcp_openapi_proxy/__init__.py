@@ -8,10 +8,9 @@ FastMCP Server (static tools) based on OPENAPI_SIMPLE_MODE env var.
 import os
 import sys
 from dotenv import load_dotenv
+load_dotenv() # Load .env if present, prior to logging setup so OPENAPI_LOGFILE_PATH is honored
+from importlib.metadata import version
 from mcp_openapi_proxy.logging_setup import setup_logging
-
-# Load environment variables from .env if present
-load_dotenv()
 
 def main():
     """
@@ -24,7 +23,7 @@ def main():
     DEBUG = os.getenv("DEBUG", "").lower() in ("true", "1", "yes")
     logger = setup_logging(debug=DEBUG)
 
-    logger.debug("Starting mcp_openapi_proxy package entry point.")
+    logger.debug(f"Starting mcp_openapi_proxy [{version("mcp-openapi-proxy")}] package entry point.")
 
     OPENAPI_SIMPLE_MODE = os.getenv("OPENAPI_SIMPLE_MODE", "false").lower() in ("true", "1", "yes")
     if OPENAPI_SIMPLE_MODE:
